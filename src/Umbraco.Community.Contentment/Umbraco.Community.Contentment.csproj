@@ -298,7 +298,7 @@
     <Compile Include="DataEditors\ContentBlocks\ContentBlocksDisplayModeConfigurationField.cs" />
     <Compile Include="Composing\ContentmentListItemCollectionBuilder.cs" />
     <Compile Include="DataEditors\DataList\DataSources\FontAwesomeDataSource.cs" />
-    <Compile Include="DataEditors\DataList\DataSources\IDataListSourceValueConverter.cs" />
+    <Compile Include="DataEditors\DataList\IDataListSourceValueConverter.cs" />
     <Compile Include="DataEditors\DataList\DataSources\JsonDataListSource.cs" />
     <Compile Include="DataEditors\DataList\DataSources\PhysicalFileSystemDataSource.cs" />
     <Compile Include="DataEditors\DataList\DataSources\SqlDataListSource.cs" />
@@ -310,6 +310,7 @@
     <Compile Include="DataEditors\DataList\DataSources\UserDefinedDataListSource.cs" />
     <Compile Include="DataEditors\DataList\DataSources\XmlDataListSource.cs" />
     <Compile Include="DataEditors\NumberInput\NumberInputDataEditor.cs" />
+    <Compile Include="DataEditors\TemplatedList\TemplatedListDataListEditor.cs" />
     <Compile Include="DataEditors\TextInput\TextInputValueConverter.cs" />
     <Compile Include="DataEditors\TextInput\PrependIconConfigurationField.cs" />
     <Compile Include="DataEditors\TextInput\AppendIconConfigurationField.cs" />
@@ -334,7 +335,6 @@
     <Compile Include="DataEditors\Bytes\BytesConfigurationEditor.cs" />
     <Compile Include="DataEditors\Bytes\BytesDataEditor.cs" />
     <Compile Include="DataEditors\Bytes\BytesValueConverter.cs" />
-    <Compile Include="DataEditors\Cards\CardsDataListEditor.cs" />
     <Compile Include="DataEditors\CascadingDropdownList\CascadingDropdownListConfigurationEditor.cs" />
     <Compile Include="DataEditors\CascadingDropdownList\CascadingDropdownListDataEditor.cs" />
     <Compile Include="DataEditors\CheckboxList\CheckboxListConfigurationEditor.cs" />
@@ -356,11 +356,10 @@
     <Compile Include="DataEditors\DataList\DataListItemAttribute.cs" />
     <Compile Include="DataEditors\DataList\DataListValueConverter.cs" />
     <Compile Include="DataEditors\DataList\DataSources\EnumDataListSource.cs" />
-    <Compile Include="DataEditors\DataList\DataSources\IDataListSource.cs" />
+    <Compile Include="DataEditors\DataList\IDataListSource.cs" />
     <Compile Include="DataEditors\DataList\IDataListEditor.cs" />
     <Compile Include="DataEditors\DataTable\DataTableConfigurationEditor.cs" />
     <Compile Include="DataEditors\DataTable\DataTableDataEditor.cs" />
-    <Compile Include="DataEditors\DropdownList\AllowEmptyConfigurationField.cs" />
     <Compile Include="DataEditors\DropdownList\DropdownListConfigurationEditor.cs" />
     <Compile Include="DataEditors\DropdownList\DropdownListDataEditor.cs" />
     <Compile Include="DataEditors\DropdownList\DropdownListDataListEditor.cs" />
@@ -398,7 +397,6 @@
     <Compile Include="DataEditors\RenderMacro\RenderMacroConfigurationEditor.cs" />
     <Compile Include="DataEditors\RenderMacro\RenderMacroDataEditor.cs" />
     <Compile Include="DataEditors\RenderMacro\RenderMacroValueConverter.cs" />
-    <Compile Include="DataEditors\Toggles\TogglesDataListEditor.cs" />
     <Compile Include="DataEditors\_\ConfigurationFields\EnableDevModeConfigurationField.cs" />
     <Compile Include="DataEditors\_\IContentmentListItem.cs" />
     <Compile Include="DataEditors\ReadOnly\ReadOnlyDataValueEditor.cs" />
@@ -412,15 +410,20 @@
     <Compile Include="Web\Serialization\PublishedContentContractResolver.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DataEditors\CascadingDropdownList\README.md" />
+    <None Include="DataEditors\CheckboxList\README.md" />
+    <None Include="DataEditors\CodeEditor\README.md" />
+    <None Include="DataEditors\ConfigurationEditor\README.md" />
+    <None Include="DataEditors\DataTable\README.md" />
+    <None Include="DataEditors\DropdownList\README.md" />
+    <None Include="DataEditors\Notes\README.md" />
+    <None Include="DataEditors\RadioButtonList\README.md" />
     <None Include="packages.config" />
     <None Include="Web\UI\App_Plugins\Contentment\package.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataEditors\Buttons\buttons.css" />
     <Content Include="DataEditors\Bytes\bytes.js" />
-    <Content Include="DataEditors\Cards\cards.css" />
-    <Content Include="DataEditors\Cards\cards.html" />
-    <Content Include="DataEditors\Cards\cards.js" />
     <Content Include="DataEditors\CascadingDropdownList\cascading-dropdown-list.html" />
     <Content Include="DataEditors\CascadingDropdownList\cascading-dropdown-list.js" />
     <Content Include="DataEditors\CheckboxList\checkbox-list.css" />
@@ -448,6 +451,9 @@
     <Content Include="DataEditors\ContentBlocks\content-blocks.overlay.js" />
     <Content Include="DataEditors\ContentBlocks\content-blocks.css" />
     <Content Include="DataEditors\NumberInput\number-input.html" />
+    <None Include="DataEditors\ReadOnly\README.md" />
+    <Content Include="DataEditors\TemplatedList\templated-list.js" />
+    <Content Include="DataEditors\TemplatedList\templated-list.html" />
     <Content Include="DataEditors\TextInput\text-input.css" />
     <Content Include="DataEditors\TextInput\text-input.html" />
     <Content Include="DataEditors\TextInput\text-input.js" />
@@ -469,8 +475,6 @@
     <Content Include="DataEditors\RenderMacro\render-macro.js" />
     <Content Include="DataEditors\Buttons\buttons.html" />
     <Content Include="DataEditors\Buttons\buttons.js" />
-    <Content Include="DataEditors\Toggles\toggles.html" />
-    <Content Include="DataEditors\Toggles\toggles.js" />
     <Content Include="DataEditors\ReadOnly\readonly-node-preview.html" />
     <Content Include="DataEditors\_\_property-actions.js" />
     <Content Include="DataEditors\_\_dev-mode.js" />
@@ -481,6 +485,8 @@
     <Content Include="Web\UI\App_Plugins\Contentment\contentment.css" />
     <Content Include="Web\UI\App_Plugins\Contentment\contentment.js" />
     <Content Include="Web\UI\App_Plugins\Contentment\lang\en.xml" />
+    <Content Include="Web\UI\backoffice-ui-shim.css" />
+    <Content Include="Web\UI\backoffice.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets" Condition="Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" />

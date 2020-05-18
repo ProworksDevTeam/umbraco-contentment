@@ -12,14 +12,14 @@ namespace Umbraco.Community.Contentment.Composing
 {
     [ComposeAfter(typeof(WebInitialComposer))]
     [ComposeBefore(typeof(ContentmentRunComposer))]
-    [RuntimeLevel(MinLevel = RuntimeLevel.Boot)]
     internal sealed class ContentmentBootComposer : IUserComposer
     {
         public void Compose(Composition composition)
         {
             composition
                 .ContentmentListItems()
-                .Add(() => composition.TypeLoader.GetTypes<IContentmentListItem>());
+                    .Add(() => composition.TypeLoader.GetTypes<IContentmentListItem>())
+            ;
 
             composition.RegisterUnique<ConfigurationEditorUtility>();
         }

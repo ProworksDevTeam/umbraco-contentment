@@ -3,30 +3,31 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-angular.module("umbraco").controller("Umbraco.Community.Contentment.DataEditors.Buttons.Controller", [
+angular.module("umbraco").controller("Umbraco.Community.Contentment.DataEditors.TemplatedList.Controller", [
     "$scope",
     function ($scope) {
 
-        // console.log("buttons.model", $scope.model);
+        //console.log("templated-list.model", $scope.model);
 
         var defaultConfig = {
-            defaultIcon: "icon-science",
             defaultValue: [],
+            enableMultiple: 0,
             items: [],
-            enableMultiple: 0
+            template: "{{ item.name }}",
+            htmlAttributes: []
         };
         var config = Object.assign({}, defaultConfig, $scope.model.config);
 
         var vm = this;
 
         function init() {
+
             $scope.model.value = $scope.model.value || config.defaultValue;
 
             if (Array.isArray($scope.model.value) === false) {
                 $scope.model.value = [$scope.model.value];
             }
 
-            vm.icon = config.defaultIcon;
             vm.multiple = Object.toBoolean(config.enableMultiple);
 
             if (vm.multiple === false && $scope.model.value.length > 0) {
@@ -35,19 +36,29 @@ angular.module("umbraco").controller("Umbraco.Community.Contentment.DataEditors.
 
             vm.items = angular.copy(config.items); // TODO: Replace AngularJS dependency. [LK:2020-03-02]
 
-            _.each(vm.items, function (item) { // TODO: Replace Underscore.js dependency. [LK:2020-03-02]
+            vm.items.forEach(function (item) {
                 item.selected = _.contains($scope.model.value, item.value); // TODO: Replace Underscore.js dependency. [LK:2020-03-02]
             });
+
+            vm.htmlAttributes = config.htmlAttributes;
+
+            vm.template = config.template;
+
+            vm.uniqueId = $scope.model.hasOwnProperty("dataTypeKey")
+                ? [$scope.model.alias, $scope.model.dataTypeKey.substring(0, 8)].join("-")
+                : $scope.model.alias;
 
             vm.select = select;
         };
 
         function select(item) {
 
+            //console.log("select", item);
+
             item.selected = item.selected === false;
             $scope.model.value = [];
 
-            _.each(vm.items, function (x) { // TODO: Replace Underscore.js dependency. [LK:2020-03-02]
+            vm.items.forEach(function (x) {
 
                 if (vm.multiple === false) {
                     x.selected = x.value === item.value;
@@ -60,6 +71,7 @@ angular.module("umbraco").controller("Umbraco.Community.Contentment.DataEditors.
             });
 
             setDirty();
+
         };
 
         function setDirty() {
